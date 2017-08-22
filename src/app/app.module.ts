@@ -4,6 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { PageNotFoundComponent} from './pageNotFound/page.not.found.component';
+import { InitComponent } from './init.component';
+import { TicketDetail } from './tickets/ticket.detail';
+
 //Pipe
 import { ConversorPipe } from './pipes/conversor.pipe';
 //Input
@@ -20,6 +24,9 @@ import { TicketService } from './services/ticket.service';
 import { StoreModule } from '@ngrx/store';
 import  { counterReducer } from './services/counter';
 
+//routes
+import { RouterModule, Routes } from '@angular/router';
+import { APPROUTER } from './commons/router';
 
 
 @NgModule({
@@ -28,7 +35,10 @@ import  { counterReducer } from './services/counter';
     InputComponent,
     ConversorPipe,
     GigantDirective,
-    HighlightDirective
+    HighlightDirective,
+    PageNotFoundComponent,
+    InitComponent,
+    TicketDetail
   ],
   imports: [
     BrowserModule,
@@ -37,9 +47,10 @@ import  { counterReducer } from './services/counter';
     ReactiveFormsModule,
     //StoreModule.providerStore({ counter: counterReducer}) segun lo investigado esto solo funciona
     //en la version 2 pero en la version 4 ngrx/store no funciona por eso se paso como esta abajo forRoot
-    StoreModule.forRoot({ counter: counterReducer})
+    StoreModule.forRoot({ counter: counterReducer}),
+    RouterModule.forRoot(APPROUTER)
   ],
   providers: [TicketService],
-  bootstrap: [AppComponent]
+  bootstrap: [InitComponent]
 })
 export class AppModule {}
